@@ -9,6 +9,11 @@ uvicorn = "*"
 sqlalchemy = "*"
 databases = {extras = ["postgresql"], version = "*"}
 psycopg2-binary = "*"
+passlib = "*"
+bcrypt = "*"
+jose = "*"
+python-jose = "*"
+pydantic = {extras = ["email"], version = "*"}
 
 [dev-packages]
 
