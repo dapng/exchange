@@ -1,11 +1,14 @@
+import uvicorn
+
 from fastapi import FastAPI
 from db.base import database
-from endpoints import users, auth
+from endpoints import users, auth, jobs
 
 
 app = FastAPI(title="API exchange")
-app.include_router(users.router, prefix="/users", tags=["Users methods"])
 app.include_router(auth.router, prefix="/auth", tags=["Auth method"])
+app.include_router(users.router, prefix="/users", tags=["Users methods"])
+app.include_router(jobs.router, prefix="/jobs", tags=["Jobs methods"])
 
 @app.on_event("startup")
 async def startup():
@@ -15,3 +18,8 @@ async def startup():
 @app.on_event("shutdown")
 async def shutdown():
     await database.disconnect()
+
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", port=5000, host="0.0.0.0", reload=True)
